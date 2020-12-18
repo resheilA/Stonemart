@@ -16,6 +16,7 @@ if (mysqli_num_rows($result) > 0) {
   
   $post = $temp;			
 } else {
+	echo mysqli_error($conn);
 	$post["error"] = "Not Found";
 }
 

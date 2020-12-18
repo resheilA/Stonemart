@@ -18,6 +18,28 @@
 	
 ?>
 	
+<?php 
+$no_of_records = 1;
+
+//PAGINATION
+if(!isset($_GET["page"]))
+{
+	$_GET["page"] = 1;
+}
+
+
+if($_GET["page"] == 1){
+	$record_min = 0;	
+}
+else{
+$record_min = ($_GET["page"] * $no_of_records ) - $no_of_records;
+$record_max = ($_GET["page"] * $no_of_records );
+}
+
+$sql_count = "SELECT COUNT(*) as total_records FROM seller_product WHERE seller_product.uid =  '".$search."'";
+$records = singletable( $sql_count );
+$page = ceil($records["total_records"] / $no_of_records);
+?>	
 
 <!--Products-->
 <section class="product" style="padding-top: 8em;">
@@ -80,7 +102,7 @@
 					$addsql = "";	
 					}
 				
-					 $sql = $addsql."
+					  $sql = $addsql."
 							 (
 							 SELECT * FROM seller_product
 						     INNER JOIN product_color ON seller_product.color = product_color.no 
@@ -92,6 +114,7 @@
 							 WHERE seller_product.uid = '".$search."'	
 							 AND product_type.type LIKE '%".$type_sort."%'
 							 )
+							 LIMIT ".$no_of_records." OFFSET ".$record_min."
 							 ";
 							 
 				$sellers = singletable_all( $sql );
@@ -157,8 +180,36 @@
     </div>
   </div>
 </div>
+<center>
+<?php 
+$display_pages = 1;
+if($page > $display_pages){
+	if($_GET['page'] > $display_pages)
+	{
+		$setpagecount = $_GET['page'];
+	}
+	else
+	{
+		$setpagecount = 1;
+	}
+}
+else
+{
+		$setpagecount = 1;
+}
 
+if($_GET['page'] > 1){echo "&nbsp<a href= '?page=".($_GET["page"]-1)."'>Prev</a>";}
+for($pagecount = $setpagecount; $pagecount <= $page; $pagecount++)
+{
+	echo "&nbsp<a href= '?page=".$pagecount."'>".$pagecount."</a>";
+	
+	if($pagecount == $display_pages){echo "<a href='?page=".($display_pages+1)."'>..more</a>";break;}
+	
+}
 
+if($_GET['page'] < $page){echo "&nbsp<a href= '?page=".($_GET["page"]+1)."'>Next</a>";}
+?>
+</center>
 </section>
 
 <?php include_once("footer.php"); ?>

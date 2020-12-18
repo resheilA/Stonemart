@@ -85,7 +85,7 @@ function checkexist($POST){
 			$value = $POST[$key];
 			
 			
-			if((strpos($variable_name, 'color') !== false )||( strpos($variable_name, 'application_area') !== false )|| (strpos($variable_name, 'finishing') !== false )||( strpos($variable_name, 'form') !== false)|| (strpos($variable_name, 'product_name') !== false )){			
+			if((strpos($variable_name, 'color') !== false )||( strpos($variable_name, 'min_price') !== false )||( strpos($variable_name, 'application_area') !== false )||( strpos($variable_name, 'max_price') !== false )|| (strpos($variable_name, 'finishing') !== false )||( strpos($variable_name, 'form') !== false)|| (strpos($variable_name, 'product_name') !== false )){			
 			if((strpos($variable_name, 'color_code') == false)){
 			include_once("connect.php");
 			echo $variable_name;

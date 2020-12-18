@@ -48,11 +48,12 @@ $sql = "SELECT * FROM seller_general
     <h2>Registered Vendors With Us</h2>
     <div class="row">
 	<?php 
+	/*
 	foreach($sellers as $seller){
 		echo '
         <div class="col-md-4">
             <div class="card mt-3">
-                <div class="product-1 align-items-center text-center"max-width:100%;>
+                <div class="product-1 align-items-center text-center" style="max-width:100%;">
                     <div class="image-container" style="height:13em"> <img class="xyz rounded p-3" src="'.$seller["logo"].'" style="max-width:100%;"> </div>
                     <div class="mt-1"><b> <span>'.substr_replace(ucfirst($seller["name"]), "...", 25).'</span></b></div>
 					<div class=""><span>'.$seller["nature_of_business"].'</span>
@@ -63,6 +64,7 @@ $sql = "SELECT * FROM seller_general
             </div>
         </div>';
 	}
+	*/
 	?>
         
     </div>

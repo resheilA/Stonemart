@@ -50,7 +50,16 @@ include_once("savedata.php"); include_once("functions.php");$pid = generateRando
 		<label>Finishing type</label>
 		<input type="text" class="form-control" name="product_finishing|finishing" id="finishing_type" onkeyup="getdata('finishing_type', 'finishing_type_list')" placeholder="Enter finishing type">
 	  </div>
-	  <div id="finishing_type_list"></div>
+	  <div class="form-group">
+		<label>Minimum Price</label>
+		<input type="number" class="form-control" name="product_minprice|min_price" id="pricing" onkeyup="getdata('pricing', 'minpricing_list')" placeholder="Enter Price">
+	  </div>
+	  <div id="minpricing_list"></div>
+	  <div class="form-group">
+		<label>Maximum Price</label>
+		<input type="number" class="form-control" name="product_maxprice|max_price" id="pricing" onkeyup="getdata('pricing', 'maxpricing_list')" placeholder="Enter Price">
+	  </div>
+	  <div id="maxpricing_list"></div>
 	  <div class="form-group">
 		<label>Form</label>
 		<input type="text" class="form-control" name="product_form|form" id="form_type" onkeyup="getdata('form_type', 'form_type_list')" placeholder="Enter form type">

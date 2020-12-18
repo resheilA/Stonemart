@@ -81,6 +81,13 @@
 	{
 	foreach($sellers as $seller)
 	{
+			
+			//FOR LOGO 
+			if(!$seller["logo"]){
+				$seller["logo"] = "img/logo.png";
+			}
+			
+			
 			echo '
 			   <!-- list group item-->
         <li class="list-group-item">
@@ -114,7 +121,7 @@
 						';
 				}
 				echo '
-            </div><img src="'.$seller['logo'].'" alt="Product Image" width="200" class="ml-lg-5 order-1 order-lg-2">
+            </div><img src="'.$seller['logo'].'" alt="No Image" width="200" class="ml-lg-5 order-1 order-lg-2">
           </div>		  
           <!-- End -->
         </li>
@@ -220,6 +227,8 @@
 							 INNER JOIN product_application ON seller_product.application_area = product_application.no 
 							 INNER JOIN product_finishing ON seller_product.finishing = product_finishing.no 
 							 INNER JOIN product_form ON seller_product.form = product_form.no 
+							 INNER JOIN product_minprice ON seller_product.min_price = product_minprice.no 
+							 INNER JOIN product_maxprice ON seller_product.max_price = product_maxprice.no 
 							 INNER JOIN product_name ON seller_product.product_name = product_name.no 
 							 INNER JOIN product_type ON seller_product.type_id = product_type.no			 							 
 							 WHERE seller_product.uid =  '".$search."' 
@@ -237,11 +246,13 @@
 							 (
 							 SELECT * FROM seller_product
 						     INNER JOIN product_color ON seller_product.color = product_color.no 
-							 INNER JOIN product_application ON seller_product.application_area = product_application.no 
+							 INNER JOIN product_application ON seller_product.application_area = product_application.no 							 
 							 INNER JOIN product_finishing ON seller_product.finishing = product_finishing.no 
-							 INNER JOIN product_form ON seller_product.form = product_form.no 
+							 INNER JOIN product_form ON seller_product.form = product_form.no
+							 INNER JOIN product_minprice ON seller_product.min_price = product_minprice.no 
+							 INNER JOIN product_maxprice ON seller_product.max_price = product_maxprice.no 							 
 							 INNER JOIN product_name ON seller_product.product_name = product_name.no 
-							 INNER JOIN product_type ON seller_product.type_id = product_type.no			 							 
+							 INNER JOIN product_type ON seller_product.type_id = product_type.no			 												
 							 WHERE seller_product.uid = '".$search."'	
 							 AND product_type.type LIKE '%".$type_sort."%'
 							 )
@@ -280,7 +291,7 @@
 								  <p class="mt-0  mb-0">Application Area - '.$product["application_area"].'</p>								  
 								  <p class="mt-0  mb-0">Finishing - '.$product["finishing"].'</p>
 								  <p class="mt-0  mb-0">Size - '.$product["size"].' &nbsp Thickness - '.$product["thickness"].'</p>
-								  
+								  <p class="mt-0  mb-0">Price Range - Rs '.$product["min_price"].' - Rs '.$product["max_price"].' &nbsp</p>
 								  
 								  <div class="d-flex align-items-center justify-content-between mt-1">
 									<p><i class="fa fa-cart-arrow-down"></i> MOQ - '.$product["moq"].'</p>																		

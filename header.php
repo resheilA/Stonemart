@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="/stonemarts/templates/" />
-    <title>StoneMarts</title>
+    <base href="" />
+    <title>StoneMarket.in</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -23,9 +23,9 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-lg-3 col-sm-4 col-md-4 col-5"> <a href="#" class="brand-wrap" data-abc="true">
-                        <!-- <img class="logo" src="http://ampexamples.com/data/upload/2017/08/bootstrap2_logo.png"> --> <span class="logo">Stonemarts</span> </a> </div>
+                        <!-- <img class="logo" src="http://ampexamples.com/data/upload/2017/08/bootstrap2_logo.png"> --> <span class="logo">Stonemarket</span> </a> </div>
                 <div class="col-lg-4 col-xl-5 col-sm-8 col-md-4 d-none d-md-block">
-                    <form action="listsellers.php" method="get" class="search-wrap">
+                    <form action="searchproduct.php" method="get" class="search-wrap">
                         <div class="input-group w-100"> <input name="search" type="text" class="form-control search-form" style="width:55%;" placeholder="Search" value="<?php if(isset($_GET['search'])){echo $_GET['search'];}?>">
                             <div class="input-group-append"> <button class="btn btn-primary search-button" type="submit"> <i class="fa fa-search"></i> </button> </div>
                         </div>
@@ -58,7 +58,7 @@
     </section>
     <nav class="navbar navbar-expand-md navbar-main border-bottom">
         <div class="container-fluid">
-            <form class="d-md-none my-2" method="get" action="listsellers.php">
+            <form class="d-md-none my-2" method="get" action="searchproduct.php">
                 <div class="input-group">
 				<input type="text" name="search" class="form-control" placeholder="Search" required="" value="<?php if(isset($_GET['search'])){echo $_GET['search'];}?>">
                     <div class="input-group-append"> <button type="submit" class="btn btn-secondary"> <i class="fa fa-search"></i> </button> </div>
@@ -67,7 +67,7 @@
             <div class="navbar-collapse collapse" id="dropdown6" style="">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"> <a class="nav-link" href="index.php" data-abc="true">Home</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="listsellers.php" data-abc="true">Products</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="searchproduct.php" data-abc="true">Products</a> </li>
 
                     <li class="nav-item"> <a class="nav-link" href="about.php" data-abc="true">About</a> </li>
                     <li class="nav-item"> <a class="nav-link" href="contact.php" data-abc="true">Contact</a> </li>

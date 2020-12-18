@@ -19,8 +19,9 @@ include_once("getalldata.php");
  INNER JOIN product_finishing ON seller_product.finishing = product_finishing.no 
  INNER JOIN product_form ON seller_product.form = product_form.no 
  INNER JOIN product_name ON seller_product.product_name = product_name.no 
- INNER JOIN product_type ON seller_product.type_id = product_type.no 
- 
+ INNER JOIN product_minprice ON seller_product.min_price = product_minprice.no 
+ INNER JOIN product_maxprice ON seller_product.max_price = product_maxprice.no 
+ INNER JOIN product_type ON seller_product.type_id = product_type.no  
  WHERE seller_product.pid = '".$_GET['pid']."' AND seller_product.uid = '".$uid."'";
 $result_row = singletable_all( $sql );	
 
@@ -84,6 +85,16 @@ if(isset($result_row["error"]))
 		<label>Finishing type</label>
 		<input type="text" class="form-control" name="product_finishing|finishing" id="finishing_type" onkeyup="getdata('finishing_type', 'finishing_type_list')" value="<?php echo $result_row['0']['finishing']; ?>" placeholder="Enter finishing type">
 	  </div>
+	  <div class="form-group">
+	  <label>Minimum Price</label>
+	  <input type="number" class="form-control" name="product_minprice|min_price" id="pricing" onkeyup="getdata('pricing', 'minpricing_list')" value="<?php echo $result_row['0']['min_price']; ?>" placeholder="Enter Minimum Price">
+	  </div>
+	  <div id="minpricing_list"></div>
+	  <div class="form-group">
+	  <label>Maximum Price</label>
+	  <input type="number" class="form-control" name="product_maxprice|max_price" id="pricing" onkeyup="getdata('pricing', 'maxpricing_list')" value="<?php echo $result_row['0']['max_price']; ?>" placeholder="Enter Maximum Price">
+	  </div>
+	  <div id="maxpricing_list"></div>
 	  <div id="finishing_type_list"></div>
 	  <div class="form-group">
 		<label>Form</label>
@@ -114,66 +125,6 @@ if(isset($result_row["error"]))
 </center>
    <!-- Footer -->
 <br>
-   <footer class="bg-white">
-    <div class="container py-5">
-        <div class="row py-3">
-            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-                <h6 class="text-uppercase font-weight-bold mb-4">About</h6>
-                <ul class="list-unstyled mb-0">
-                    <li class="mb-2"><a href="#" class="text-muted">Contact Us</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">About Us</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Stories</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Press</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-                <h6 class="text-uppercase font-weight-bold mb-4">Help</h6>
-                <ul class="list-unstyled mb-0">
-                    <li class="mb-2"><a href="#" class="text-muted">Payments</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Shipping</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Cancellation</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Returns</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-                <h6 class="text-uppercase font-weight-bold mb-4">Policy</h6>
-                <ul class="list-unstyled mb-0">
-                    <li class="mb-2"><a href="#" class="text-muted">Return Policy</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Terms Of Use</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Security</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Privacy</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-                <h6 class="text-uppercase font-weight-bold mb-4">Company</h6>
-                <ul class="list-unstyled mb-0">
-                    <li class="mb-2"><a href="#" class="text-muted">Login</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Register</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Sitemap</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Our Products</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-lg-0">
-                <h6 class="text-uppercase font-weight-bold mb-4">Registered Office Address</h6>
-                <p class="text-muted mb-4">Here , write the complete address of the Registered office address along with telephone number.</p>
-                <ul class="list-inline mt-4">
-                    <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i class="fab fa-2x fa-twitter"></i></a></li>
-                    <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i class="fab fa-2x fa-facebook-f"></i></a></li>
-                    <li class="list-inline-item"><a href="#" target="_blank" title="instagram"><i class="fab fa-2x fa-instagram"></i></a></li>
-                    <li class="list-inline-item"><a href="#" target="_blank" title="pinterest"><i class="fab fa-2x fa-youtube"></i></a></li>
-                    <li class="list-inline-item"><a href="#" target="_blank" title="vimeo"><i class="fab fa-2x fa-google"></i></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <hr class="p-0 m-0 b-0">
-    <div class=" py-2">
-        <div class="container text-center">
-            <p class="text-muted mb-0 py-2">© 2020 Webportal All rights reserved</p>
-        </div>
-    </div>
-</footer>
-<!--Footer end-->
 
 	<script>
 	function getdata(type, output){
@@ -204,5 +155,4 @@ if(isset($result_row["error"]))
 		$('#'+div).val(value);
 	}
 	</script>
-</body>
-</html>
+<?php include_once("footer.php"); ?>
