@@ -17,7 +17,7 @@ include("functions.php");
   	include("getsingledata.php"); 
 	include("getalldata.php"); 
 	
-	$pincode = $_COOKIE["user_pincode"];
+	$pincode = $_COOKIE["user_city"];
 		 
 	   if(isset($_GET["search"]) && $_GET["search"] != null){ 
 	   $search = RemoveSpecialChar(urldecode($_GET["search"]." in ".$pincode));
@@ -56,7 +56,7 @@ $sql_count = "SELECT COUNT(*) as total_records,
 						MATCH(product_form.form) AGAINST ('".$search."*' IN BOOLEAN MODE) AS SCORE_FORM,
 						MATCH(seller_general.name) AGAINST ('".$search."*' IN BOOLEAN MODE) AS SCORE_GNAME,			 
 						MATCH(seller_location.address) AGAINST ('".$search."*' IN BOOLEAN MODE) AS SCORE_LOCATION,
-						MATCH(seller_location.pincode) AGAINST ('".$search."*' IN BOOLEAN MODE) AS SCORE_PINCODE
+						MATCH(seller_location.city) AGAINST ('".$search."*' IN BOOLEAN MODE) AS SCORE_PINCODE
 					 FROM seller_product
 					 INNER JOIN product_color ON seller_product.color = product_color.no 
 					 INNER JOIN product_application ON seller_product.application_area = product_application.no 
@@ -75,7 +75,7 @@ $sql_count = "SELECT COUNT(*) as total_records,
 					 OR MATCH(product_form.form) AGAINST ('".$search."*' IN BOOLEAN MODE)
 					 OR MATCH(seller_general.name) AGAINST ('".$search."*' IN BOOLEAN MODE)			 
 					 OR MATCH(seller_location.address) AGAINST ('".$search."*' IN BOOLEAN MODE)
-					 OR MATCH(seller_location.pincode) AGAINST ('".$search."*' IN BOOLEAN MODE)
+					 OR MATCH(seller_location.city) AGAINST ('".$search."*' IN BOOLEAN MODE)
 					 ORDER BY SCORE_PINCODE ASC					 
 					 ";			
 }		
@@ -109,7 +109,7 @@ if(!empty($color_sort) || !empty($type_sort)  || !empty($form_sort)  || !empty($
 			 AND product_form.form LIKE '%".$form_sort."%'	
 			 AND product_minprice.min_price ".$min_price."
 			 AND product_maxprice.max_price ".$max_price."
-			 AND seller_location.pincode LIKE '%".$pincode."%'"	
+			 AND seller_location.city LIKE '%".$pincode."%'"	
 			 ;
 }
 	
@@ -132,7 +132,7 @@ if((isset($_GET["search"]) && $_GET["search"] != null))
 						MATCH(product_form.form) AGAINST ('".$search."*' IN BOOLEAN MODE) AS SCORE_FORM,
 						MATCH(seller_general.name) AGAINST ('".$search."*' IN BOOLEAN MODE) AS SCORE_GNAME,			 
 						MATCH(seller_location.address) AGAINST ('".$search."*' IN BOOLEAN MODE) AS SCORE_LOCATION,
-						MATCH(seller_location.pincode) AGAINST ('".$search."*' IN BOOLEAN MODE) AS SCORE_PINCODE
+						MATCH(seller_location.city) AGAINST ('".$search."*' IN BOOLEAN MODE) AS SCORE_PINCODE
 					 FROM seller_product
 					 INNER JOIN product_color ON seller_product.color = product_color.no 
 					 INNER JOIN product_application ON seller_product.application_area = product_application.no 
@@ -151,7 +151,7 @@ if((isset($_GET["search"]) && $_GET["search"] != null))
 					 OR MATCH(product_form.form) AGAINST ('".$search."*' IN BOOLEAN MODE)
 					 OR MATCH(seller_general.name) AGAINST ('".$search."*' IN BOOLEAN MODE)			 
 					 OR MATCH(seller_location.address) AGAINST ('".$search."*' IN BOOLEAN MODE)
-					 OR MATCH(seller_location.pincode) AGAINST ('".$search."*' IN BOOLEAN MODE)
+					 OR MATCH(seller_location.city) AGAINST ('".$search."*' IN BOOLEAN MODE)
 					 ORDER BY (SCORE_APPLICATION*0.05)+(SCORE_COLOR*0.1)+(SCORE_FINISH*0.05)+(SCORE_FORM*0.06)+(SCORE_GNAME*0.12)+(SCORE_LOCATION*0.12)+(SCORE_NAME*0.12)+(SCORE_PINCODE*0.18)+(SCORE_TYPE*0.15) DESC
 					 LIMIT ".$no_of_records." OFFSET ".$record_min."
 					 ";
@@ -177,7 +177,7 @@ if(!empty($color_sort) || !empty($type_sort)  || !empty($form_sort)  || !empty($
 			 AND product_form.form LIKE '%".$form_sort."%'	
 			 AND product_minprice.min_price ".$min_price."
 			 AND product_maxprice.max_price ".$max_price."
-			 AND seller_location.pincode LIKE '%".$pincode."%'			 
+			 AND seller_location.city LIKE '%".$pincode."%'			 
 			 LIMIT ".$no_of_records." OFFSET ".$record_min."
 			 ";
 }
@@ -723,7 +723,7 @@ function zoomimage(imgsrc){
 </script>
 <?php 
 
-if(!(isset($_COOKIE["user_pincode"])))
+if(!(isset($_COOKIE["user_city"])))
 {
 echo '
 <script type="text/javascript">
