@@ -14,11 +14,11 @@ $sql = "SELECT * FROM seller_general
 <?php include("header.php"); ?>
 
 <!--Banner-->
-<div class="hero-image">
+<div class="hero-image" style="height:60%;">
     <div class="hero-text">
       <h1 style="font-size:50px"><b>Buy And Sell Stones</b></h1>
-      <p>India's first and only place for exclusive listing of Tiles, marbles, Granites and etc</p>
-      <a href="listsellers.php?search="><button>View list</button></a>
+      <p>India's first and only place for exclusive listing of marbles, Granites and etc</p>
+      <a href="searchproduct.php?search="><button>View list</button></a>
     </div>
   </div>
 <!--Banner End-->
@@ -69,7 +69,7 @@ $sql = "SELECT * FROM seller_general
         
     </div>
 </div>
-<center><a href="listsellers.php?search="><button>View list of Products by Vendors</button></a></center>
+<center><a href="searchproduct.php?search="><button>View list of Products by Vendors</button></a></center>
 </section> 
 <!--Products end-->
 
@@ -165,5 +165,6 @@ $sql = "SELECT * FROM seller_general
         </div>
     </footer>
     <!--Footer end-->
+	
 </body>
 </html>

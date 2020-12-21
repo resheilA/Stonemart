@@ -1,4 +1,5 @@
 <?php include_once("header.php");
+
 include("functions.php");
 
    if(isset($_GET['id']) && $_GET['id'] != null)
@@ -15,7 +16,13 @@ include("functions.php");
   }
   	include("getsingledata.php"); 
 	include("getalldata.php"); 
-	  if(isset($_GET["search"]) && $_GET["search"] != null){ $search = RemoveSpecialChar(urldecode($_GET["search"]));}else{$search = "";}
+	
+	$pincode = $_COOKIE["user_pincode"];
+		 
+	   if(isset($_GET["search"]) && $_GET["search"] != null){ 
+	   $search = RemoveSpecialChar(urldecode($_GET["search"]." in ".$pincode));
+	   }
+	   else{$search = "";}
 ?>
 
 	
@@ -83,21 +90,26 @@ $sql_count = "SELECT COUNT(*) as total_records,
   if(isset($_GET["max_price"]) && $_GET["max_price"] != null){$max_price = $_GET["max_price"];}else{$max_price = "> 0";}
 
 if(!empty($color_sort) || !empty($type_sort)  || !empty($form_sort)  || !empty($color_finish)){
-	$sql_count = "SELECT COUNT(*) as total_records FROM seller_product
+	$sql_count = "SELECT COUNT(*) as total_records FROM seller_product			 
 			 INNER JOIN product_color ON seller_product.color = product_color.no 
 			 INNER JOIN product_name ON seller_product.product_name = product_name.no 
 			 INNER JOIN product_application ON seller_product.application_area = product_application.no 
 			 INNER JOIN product_finishing ON seller_product.finishing = product_finishing.no 
 			 INNER JOIN product_form ON seller_product.form = product_form.no 
 			 INNER JOIN product_type ON seller_product.type_id = product_type.no
+			 INNER JOIN product_minprice ON seller_product.min_price = product_minprice.no
+			 INNER JOIN product_maxprice ON seller_product.max_price = product_maxprice.no
 			 INNER JOIN seller_location ON seller_product.uid = seller_location.uid			 
-			 INNER JOIN seller_general ON seller_product.uid = seller_general.uid				 
+			 INNER JOIN seller_general ON seller_product.uid = seller_general.uid				 			 
 			 WHERE 
-			  product_color.color LIKE '%".$color_sort."%'			 
+			 product_color.color LIKE '%".$color_sort."%'			 
 			 AND product_type.type LIKE '%".$type_sort."%'
 			 AND seller_location.city LIKE '%".$location_sort."%'
 			 AND product_finishing.finishing LIKE '%".$color_finish."%'
-			 AND product_form.form LIKE '%".$form_sort."%'"
+			 AND product_form.form LIKE '%".$form_sort."%'	
+			 AND product_minprice.min_price ".$min_price."
+			 AND product_maxprice.max_price ".$max_price."
+			 AND seller_location.pincode LIKE '%".$pincode."%'"	
 			 ;
 }
 	
@@ -165,11 +177,7 @@ if(!empty($color_sort) || !empty($type_sort)  || !empty($form_sort)  || !empty($
 			 AND product_form.form LIKE '%".$form_sort."%'	
 			 AND product_minprice.min_price ".$min_price."
 			 AND product_maxprice.max_price ".$max_price."
-			 AND product_color.color LIKE '%".$search."%'			 
-			 AND product_type.type LIKE '%".$search."%'
-			 AND seller_location.city LIKE '%".$search."%'
-			 AND product_finishing.finishing LIKE '%".$search."%'
-			 AND product_form.form LIKE '%".$search."%'					 
+			 AND seller_location.pincode LIKE '%".$pincode."%'			 
 			 LIMIT ".$no_of_records." OFFSET ".$record_min."
 			 ";
 }
@@ -301,7 +309,7 @@ if(empty($sql)){
 	</div>
     <div class="col-lg-9 mx-auto">
 	   <!-- List group-->
-
+<p><?php  if(isset($search) && $search != null){echo 'Search results for "'.$search.'"';} ?></p>
 
 <?php 
 					
@@ -317,7 +325,9 @@ if(empty($sql)){
 					
 					
 				$sellers = singletable_all( $sql );
-				//var_dump($sellers);
+				
+				
+				
 				if(!isset($sellers["error"]) && isset($sellers) && isset($sellers[0]["SCORE_APPLICATION"]))
 				{
 				 for($seller_count =0;$seller_count < sizeof($sellers);$seller_count++)
@@ -392,7 +402,7 @@ if(empty($sql)){
 								  								  	
 								  <div class="d-flex align-items-center justify-content-between mt-1">
 									<p><i class="fa fa-cart-arrow-down"></i> MOQ - '.$product["moq"].'</p>
-<p><a href="clientsignup.php?id='.$product['uid'].'&pid='.$product['pid'].'"><button class="btn mt-2">Details</button></a></p>
+<p><a href="clientsignup.php?id='.$product['uid'].'&pid='.$product['pid'].'"><button class="btn text-light mt-2">Details</button></a></p>
 								  </div>
 								</div>
 								<img src="'.$product["image"].'" alt="Generic placeholder image" width="200"  class="ml-lg-5 order-1 order-lg-2" data-toggle="modal" data-target="#imageModal" onclick="zoomimage(\''.$product["image"].'\')">
@@ -406,7 +416,86 @@ if(empty($sql)){
 				}	
 				else
 				{
-						echo "<div class='p-4'>No results found. Please try searching something else.</div>";	
+						echo "<div class='p-4'>No results found near you in your pincode.</div>";	
+							if(isset($sellers["error"]))
+				{
+					
+					// SEARCH ONLY IF THERE ARE NO RESULTS FOUND
+					 $sql = "SELECT * FROM seller_product
+					 INNER JOIN product_color ON seller_product.color = product_color.no 
+					 INNER JOIN product_name ON seller_product.product_name = product_name.no 
+					 INNER JOIN product_application ON seller_product.application_area = product_application.no 
+					 INNER JOIN product_finishing ON seller_product.finishing = product_finishing.no 
+					 INNER JOIN product_form ON seller_product.form = product_form.no 
+					 INNER JOIN product_type ON seller_product.type_id = product_type.no
+					 INNER JOIN product_minprice ON seller_product.min_price = product_minprice.no
+					 INNER JOIN product_maxprice ON seller_product.max_price = product_maxprice.no
+					 INNER JOIN seller_location ON seller_product.uid = seller_location.uid			 
+					 INNER JOIN seller_general ON seller_product.uid = seller_general.uid				 			 
+					 WHERE 
+					 product_color.color LIKE '%".$color_sort."%'			 
+					 AND product_type.type LIKE '%".$type_sort."%'
+					 AND seller_location.city LIKE '%".$location_sort."%'
+					 AND product_finishing.finishing LIKE '%".$color_finish."%'
+					 AND product_form.form LIKE '%".$form_sort."%'	
+					 AND product_minprice.min_price ".$min_price."
+					 AND product_maxprice.max_price ".$max_price."
+					 LIMIT 20
+					 ";
+				     $sellers = singletable_all( $sql );
+					 echo '<h3><hr>Other Results</h3><hr>';
+					 
+					 foreach($sellers as $product)							
+						{
+							//echo $product["total_score"]."<br>";
+							//echo $product["ntotal_score"];
+							
+							if(isset($_GET["pid"])){
+							if($product["pid"] != $_GET['pid'])
+							{
+								$selected = "";								
+							}
+							else
+							{
+								$selected = "border:2px solid black;";
+							}
+							}else
+							{
+								$selected = "";
+							}
+							
+								if(isset($product["product_name"])){
+								echo '
+								
+								   <!-- list group item-->
+							<li class="list-group-item" style="'.$selected.'">
+							  <!-- Custom content-->
+							  <div class="media align-items-lg-center flex-column flex-lg-row p-3" >
+								<div class="media-body order-2 order-lg-1">
+								  <h4 class="mt-0 font-weight-bold mb-2">'.$product["product_name"].' - '.$product["color"].'</h4>
+								  <p class="mt-0 font-weight-bold mb-0"><i class="fa fa-th-large"></i> '.$product["type"].' &nbsp <i class="fa fa-square"></i> '.$product["form"].'
+								  </p>
+								  <p class="text-muted mb-0">'.mb_strimwidth($product["details"], 0, 200, "...").'</p>
+								  
+								  <p class="mt-0  mb-0">Application Area - '.$product["application_area"].'</p>								  
+								  <p class="mt-0  mb-0">Finishing - '.$product["finishing"].'</p>
+								  <p class="mt-0  mb-0">Size - '.$product["size"].' &nbsp Thickness - '.$product["thickness"].'</p>
+								  								  	
+								  <div class="d-flex align-items-center justify-content-between mt-1">
+									<p><i class="fa fa-cart-arrow-down"></i> MOQ - '.$product["moq"].'</p>
+<p><a href="clientsignup.php?id='.$product['uid'].'&pid='.$product['pid'].'"><button class="btn text-light mt-2">Details</button></a></p>
+								  </div>
+								</div>
+								<img src="'.$product["image"].'" alt="Generic placeholder image" width="200"  class="ml-lg-5 order-1 order-lg-2" data-toggle="modal" data-target="#imageModal" onclick="zoomimage(\''.$product["image"].'\')">
+							  </div>
+							  <!-- End -->
+							</li>
+							<!-- End -->													
+								';
+								}
+						}
+					 
+				}
 				}					
 					?>	   
 
@@ -603,7 +692,28 @@ if($_GET['page'] < $page){echo "&nbsp<a href= '?color_finish=".$color_finish."&f
   </div>
 </div>
 
+<!-- The Modal -->
+<div class="modal mt-5" id="pincodeModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
+      <!-- Modal body -->
+      <div class="modal-body">	  
+        Enter your Pincode
+		<form method="get">
+			<input type="number" name="pincode">
+				<input type="submit" value="Submit">
+		</form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <!------------------------------------------------------------------->
 <script>
@@ -611,4 +721,17 @@ function zoomimage(imgsrc){
 	$("#modalimage").attr("src",imgsrc);
 }
 </script>
+<?php 
+
+if(!(isset($_COOKIE["user_pincode"])))
+{
+echo '
+<script type="text/javascript">
+    $(window).on(\'load\',function(){
+        $(\'#pincodeModal\').modal(\'show\');
+    });
+</script>
+';
+}
+?>
 <?php include_once("footer.php"); ?>

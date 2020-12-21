@@ -89,9 +89,13 @@
 		<input type="text" class="form-control" name="seller_location|pincode" value="<?php echo $seller["pincode"]; ?>" placeholder="Pincode">		
 	  </div>
 	  <div class="form-group">
-		<label>City</label>
-		<input type="text" class="form-control" name="seller_location|city" placeholder="City" value="<?php echo $seller["city"]; ?>">
+		<label>City*</label>
+		<input type="text" id="city" class="form-control" name="seller_location|city" placeholder="City" required value="<?php echo $seller["city"]; ?>">
 	  </div>	  
+	   <div class="form-group">
+		<label>State*</label>
+		<input type="text" id="state" class="form-control" name="seller_location|state" placeholder="State"  value="<?php echo $seller["state"]; ?>"required>
+	  </div>
 	  <input type="hidden" name="seller_certification|uid" value="<?php echo $uid; ?>">
 	  <input type="hidden" name="seller_certification|gstin" placeholder="Enter your gst certificate" value="<?php echo $seller["gstin"]; ?>">
 	  <input type="hidden" name="seller_certification|other" placeholder="Enter any other certificate or document" value="<?php echo $seller["other"]; ?>">
@@ -156,4 +160,32 @@
   </div>
 </div>
 </center><br>
+
+<script>
+function getcityfrompin(){	
+var pincode = document.getElementById("pincode").value;
+
+if(pincode.length > 5){
+ $.ajax({
+        url: "getcity.php",
+        type: "post",
+        data:  {pin:pincode},
+        success: function (response) {
+			var names = response.split(",");
+				if(names[0]){
+				document.getElementById("city").value = names[0];
+				}
+				if(names[1]){
+				document.getElementById("state").value = names[1];
+				}
+		},
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+}
+
+
+</script>
    <?php include("footer.php");?>

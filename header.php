@@ -22,8 +22,10 @@
     <section class="header-main border-bottom">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-lg-3 col-sm-4 col-md-4 col-5"> <a href="#" class="brand-wrap" data-abc="true">
-                        <!-- <img class="logo" src="http://ampexamples.com/data/upload/2017/08/bootstrap2_logo.png"> --> <span class="logo">Stonemarket</span> </a> </div>
+                <div class="col-lg-3 col-sm-4 col-md-4 col-5"> <a href="" class="brand-wrap" data-abc="true">
+                        <img class="logo" src="img/logow.png" style="width:75%;"> 
+						</a>
+						<!-------- <span class="logo">Stonemarket</span> </a> -------></div> 
                 <div class="col-lg-4 col-xl-5 col-sm-8 col-md-4 d-none d-md-block">
                     <form action="searchproduct.php" method="get" class="search-wrap">
                         <div class="input-group w-100"> <input name="search" type="text" class="form-control search-form" style="width:55%;" placeholder="Search" value="<?php if(isset($_GET['search'])){echo $_GET['search'];}?>">
