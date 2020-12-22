@@ -6,7 +6,7 @@ if(isset($_SESSION["did"]))
 	}
 	else
 	{
-	header("location:https://stonemarket.in/website_creator/searchdomain.php");	
+	echo "<script>window.location.replace('https://stonemarket.in/website_creator/searchdomain.php');</script>";
 	}
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET["q"]) && ($_GET["q"] == "content"))

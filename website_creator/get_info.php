@@ -1,15 +1,16 @@
-<?php include_once("header.php"); ?>
-<?php 
-	
-	include_once("../savedata.php"); include_once("../functions.php");
-	if(isset($_SESSION["did"]))
+<?php include_once("header.php"); 
+if(isset($_SESSION["did"]))
 	{
 	$did = $_SESSION["did"];
 	}
 	else
 	{
-	header("location:https://stonemarket.in/website_creator/searchdomain.php");	
-	}
+	echo "<script>window.location.replace('https://stonemarket.in/website_creator/searchdomain.php');</script>";
+	}?>
+<?php 
+	
+	include_once("../savedata.php"); include_once("../functions.php");
+	
 	
 	if(isset($_GET['remove']) && $_GET['remove'] != null)
 	{

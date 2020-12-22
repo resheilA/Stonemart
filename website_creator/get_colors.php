@@ -2,15 +2,15 @@
 include_once("../saveupdate.php");
 include_once("header.php");
 include("../getalldata.php"); 
-
 	if(isset($_SESSION["did"]))
 	{
 	$did = $_SESSION["did"];
 	}
 	else
 	{
-	header("location:https://stonemarket.in/website_creator/searchdomain.php");	
+	echo "<script>window.location.replace('https://stonemarket.in/website_creator/searchdomain.php');</script>";
 	}
+
 
  
 	$sql = "SELECT * FROM website_general WHERE did = '".$did."'";
