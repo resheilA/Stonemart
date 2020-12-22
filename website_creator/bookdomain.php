@@ -24,7 +24,7 @@ return $details;
 
 function get_customer_details($username){
     include("keys.php");
-echo $url ='https://test.httpapi.com/api/customers/details.json?auth-userid='.$authid.'&api-key='.$apikey.'&username='.$username;
+$url ='https://test.httpapi.com/api/customers/details.json?auth-userid='.$authid.'&api-key='.$apikey.'&username='.$username;
 
 $jsona = file_get_contents($url); 
 $myArray = json_decode($jsona, true);
@@ -106,7 +106,7 @@ $invoice_id = $inv_id;
 //$cus_id  = 22210566;
 include_once("functions.php");
 $did = generateRandomString();
-$sql = "INSERT INTO website_domain (uid, did)
+$sql = "INSERT INTO website_domain (uid, did, domain_name)
 VALUES ('".$uid."', '".$did."', '".$_SESSION["bookdomain"]."')";
 
 if ($conn->query($sql) === TRUE) {
