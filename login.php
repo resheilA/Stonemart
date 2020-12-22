@@ -8,7 +8,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	if(!isset($result["error"]))
 	{		
 		$_SESSION["uid"] = $result["uid"];
-		$_SESSION["email"] = $result["email"];				
+		$_SESSION["email"] = $result["email"];		
+
+		
+		$sql_get_did = "SELECT * FROM website_domain WHERE uid = '".$result["uid"]."'";
+		$result_did = singletable( $sql_get_did); 
+		if(!isset($result_did["error"]))
+		{
+			 $_SESSION["did"] = $result_did["did"];
+		}		
 		echo "<script>window.location.replace('seller.php');</script>";
 	}
 	else{

@@ -18,7 +18,7 @@
                     <li class="mb-2"><a href="#" class="text-muted">Payments</a></li>
                     <li class="mb-2"><a href="#" class="text-muted">Shipping</a></li>
                     <li class="mb-2"><a href="#" class="text-muted">Cancellation</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Returns</a></li>
+                    <li class="mb-2"><a href="#" class="text-muted">Returns</a></li>				
                 </ul>
             </div>
             <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">

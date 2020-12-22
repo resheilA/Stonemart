@@ -1,5 +1,13 @@
+<?php include_once("header.php"); ?>
 <?php 
-$did = "41DWF242D";
+if(isset($_SESSION["did"]))
+	{
+	$did = $_SESSION["did"];
+	}
+	else
+	{
+	header("location:https://stonemarket.in/website_creator/searchdomain.php");	
+	}
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET["q"]) && ($_GET["q"] == "content"))
 {
@@ -36,7 +44,7 @@ include("../getalldata.php");
 	$web_service = singletable_all( $sql );	
 ?>	
 
-<?php include_once("header.php"); ?>
+
 <br><br><br><br><br>
  <center>
 <div class="card col-lg-9">

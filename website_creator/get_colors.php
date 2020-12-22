@@ -1,14 +1,23 @@
 <?php
-$did = "41DWF242D";
-
 include_once("../saveupdate.php");
- include_once("header.php");
-	include("../getalldata.php"); 
+include_once("header.php");
+include("../getalldata.php"); 
+
+	if(isset($_SESSION["did"]))
+	{
+	$did = $_SESSION["did"];
+	}
+	else
+	{
+	header("location:https://stonemarket.in/website_creator/searchdomain.php");	
+	}
+
  
 	$sql = "SELECT * FROM website_general WHERE did = '".$did."'";
 			 
 	$website_colors = singletable_all( $sql );	
 	$website_color = $website_colors[0];
+
 	
 ?> 
 <br><br><br><br><br>

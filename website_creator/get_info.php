@@ -1,5 +1,15 @@
-<?php include_once("../savedata.php"); include_once("../functions.php");
-	$did = "41DWF242D";
+<?php include_once("header.php"); ?>
+<?php 
+	
+	include_once("../savedata.php"); include_once("../functions.php");
+	if(isset($_SESSION["did"]))
+	{
+	$did = $_SESSION["did"];
+	}
+	else
+	{
+	header("location:https://stonemarket.in/website_creator/searchdomain.php");	
+	}
 	
 	if(isset($_GET['remove']) && $_GET['remove'] != null)
 	{
@@ -16,17 +26,17 @@
 				 ";
 				 
 			$gallery = singletable( $sqldelete );		
-			var_dump($gallery);
+			//var_dump($gallery);
 			if(!isset($gallery["error"]))
 			{
 			$file_pointer = $gallery['client_logo'];  
 		   
 			// Use unlink() function to delete a file  
 			if (!unlink($file_pointer)) {  
-				echo ("$file_pointer cannot be deleted due to an error");  
+			//	echo ("$file_pointer cannot be deleted due to an error");  
 			}  
 			else {  
-				echo ("$file_pointer has been deleted");  
+			//	echo ("$file_pointer has been deleted");  
 			}
 			}
 		}
@@ -48,10 +58,10 @@
 				   
 					// Use unlink() function to delete a file  
 					if (!unlink($file_pointer)) {  
-						echo ("$file_pointer cannot be deleted due to an error");  
+					//	echo ("$file_pointer cannot be deleted due to an error");  
 					}  
 					else {  
-						echo ("$file_pointer has been deleted");  
+					//	echo ("$file_pointer has been deleted");  
 					}  
 				}
 		}		
@@ -90,7 +100,7 @@
 			 
 	$web_service = singletable_all( $sql );	
 ?>
-<?php include_once("header.php"); ?>
+
 <!-----Navbar End------->
  <br><br><br><br><br>
  <center>

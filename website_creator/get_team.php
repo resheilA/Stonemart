@@ -1,6 +1,13 @@
-<?php 
-$did = "41DWF242D";
-
+<?php
+include_once("header.php");  
+if(isset($_SESSION["did"]))
+	{
+	$did = $_SESSION["did"];
+	}
+	else
+	{
+	header("location:https://stonemarket.in/website_creator/searchdomain.php");	
+	}
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {	
 	$_POST["website_team|did"] = $did;
@@ -20,7 +27,7 @@ if(isset($_GET["q"]) && $_GET["q"] == "d" && isset($_GET["id"]))
 	header("location:get_team.php");
 }	
 
-include_once("header.php"); 
+
 
 include_once("../functions.php");
 

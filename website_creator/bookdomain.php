@@ -14,10 +14,10 @@ function sign_up($username, $password, $name, $company, $addressline, $city, $st
 {
 include("keys.php");
 $addressline = str_replace(' ', '', $addressline);
-echo $signup_url = 'https://test.httpapi.com/api/customers/signup.json?auth-userid='.$authid.'&api-key='.$apikey.'&username='.$username.'&passwd='.$password.'&name='.urlencode($name).'&company='.urlencode($company).'&address-line-1='.urlencode($addressline).'&city='.$city.'&state='.$state.'&country=IN&zipcode='.$zip.'&phone-cc='.$callcode.'&phone='.$number.'&lang-pref=en';
+$signup_url = 'https://test.httpapi.com/api/customers/signup.json?auth-userid='.$authid.'&api-key='.$apikey.'&username='.$username.'&passwd='.$password.'&name='.urlencode($name).'&company='.urlencode($company).'&address-line-1='.urlencode($addressline).'&city='.$city.'&state='.$state.'&country=IN&zipcode='.$zip.'&phone-cc='.$callcode.'&phone='.$number.'&lang-pref=en';
 
 $details = file_get_contents($signup_url); 
-var_dump($details);
+//var_dump($details);
 return $details;
 }
 
@@ -90,7 +90,7 @@ $cus_id = get_customer_details($seller["email"]);
 if($cus_id != NULL) {
     
 $desc  = "Payment_automatic";
-add_funds($cus_id, '1600', $desc, rand(1000000,9999999));
+//add_funds($cus_id, '1600', $desc, rand(1000000,9999999));
 
 
 //$cus_id = 22210402;
@@ -104,8 +104,23 @@ $inv_id =  $register_domain["invoiceid"];
 
 $invoice_id = $inv_id;
 //$cus_id  = 22210566;
+include_once("functions.php");
+$did = generateRandomString();
+$sql = "INSERT INTO website_domain (uid, did)
+VALUES ('".$uid."', '".$did."', '".$_SESSION["bookdomain"]."')";
 
-pay_customer_invoice($invoice_id);
+if ($conn->query($sql) === TRUE) {
+	$_SESSION["did"] = $did;
+//  echo "New record created successfully";
+} else {
+ // echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+
+
+
+
+//pay_customer_invoice($invoice_id);
 }
 }
 else
@@ -119,6 +134,7 @@ else
     <div class="col-12 m-5" style="border:1px solid black;">
         <i class="fa fa-check-circle" style="color:green;font-size:20px;" aria-hidden="true"></i><br>
         <?php echo $domain_status.".Registered domain name is ".$_SESSION["bookdomain"].". <br>Your invoice id : ".$inv_id; ?>
+		<a href="managewebsite.php">Back To DashBoard </a>
     </div>
     </center>
 </div>
