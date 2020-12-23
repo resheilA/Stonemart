@@ -81,13 +81,13 @@ if(isset($_SESSION["did"]))
 	include("../getalldata.php"); 
 	
 	$sql = "SELECT * FROM website_clients
-			 WHERE website_clients.did = '41DWF242D'			 
+			 WHERE website_clients.did = '".$did."'			 
 			 ";
 			 
 	$client_logos = singletable_all( $sql );	
 
 	$sql = "SELECT * FROM website_gallery
-			 WHERE website_gallery.did = '41DWF242D'			 
+			 WHERE website_gallery.did = '".$did."'			 
 			 ";
 			 
 	$client_gallery = singletable_all( $sql );

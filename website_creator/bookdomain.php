@@ -1,5 +1,9 @@
 <?php 
-include("header.php");
+session_start();
+var_dump($_SESSION);
+
+
+include("header.php");echo "<br><br><br><br><br><br><br><br>";
 function get_contact_details($customer_id){
     include("keys.php");
 $url ='https://test.httpapi.com/api/contacts/default.json?auth-userid='.$authid.'&api-key='.$apikey.'&customer-id='.$customer_id.'&type=Contact';
@@ -104,23 +108,22 @@ $inv_id =  $register_domain["invoiceid"];
 
 $invoice_id = $inv_id;
 //$cus_id  = 22210566;
+
+
 include_once("functions.php");
 $did = generateRandomString();
-$sql = "INSERT INTO website_domain (uid, did, domain_name)
-VALUES ('".$uid."', '".$did."', '".$_SESSION["bookdomain"]."')";
-
+	
+include_once("connect.php");
+echo $sql = "INSERT INTO website_domain (uid, did, domain_name)
+VALUES ('".$_SESSION["uid"]."', '".$did."', '".$_SESSION["bookdomain"]."')";
 if ($conn->query($sql) === TRUE) {
 	$_SESSION["did"] = $did;
-//  echo "New record created successfully";
+  echo "New record created successfully";
 } else {
- // echo "Error: " . $sql . "<br>" . $conn->error;
+  echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
-
-
-
-
-//pay_customer_invoice($invoice_id);
+pay_customer_invoice($invoice_id);
 }
 }
 else
