@@ -14,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET["q"]) && ($_GET["q"] == "
 	if(!empty($_POST["website_service_content|service_content"]) || !empty($_POST["website_service_content|service_name"])){	
 	$_POST["website_service_content|Locked"] = $did;	
 	include_once("../savedata.php"); 
-	header("location:get_services.php");
+	echo "<script>window.location.replace('https://stonemarket.in/website_creator/get_services.php');</script>";		
 	}		
 }
 else if($_SERVER["REQUEST_METHOD"] == "POST")
@@ -39,9 +39,10 @@ include("../getalldata.php");
 	$website_services = singletable_all( $sql );	
 	
 	
-	$sql = "SELECT * FROM website_services INNER JOIN website_service_content ON website_services.service_id = website_service_content.no";
+	$sql = "SELECT * FROM website_services INNER JOIN website_service_content ON website_services.service_id = website_service_content.no WHERE website_services.did = '".$did."'";
 			 
 	$web_service = singletable_all( $sql );	
+	
 ?>	
 
 
