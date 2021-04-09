@@ -17,8 +17,10 @@ include("functions.php");
   	include("getsingledata.php"); 
 	include("getalldata.php"); 
 	
+	if(isset($_COOKIE["user_city"])){
 	$pincode = $_COOKIE["user_city"];
-		 
+	}
+	
 	   if(isset($_GET["search"]) && $_GET["search"] != null){ 
 	   $search = RemoveSpecialChar(urldecode($_GET["search"]." in ".$pincode));
 	   }
