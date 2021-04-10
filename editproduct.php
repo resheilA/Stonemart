@@ -51,9 +51,85 @@ if(isset($result_row["error"]))
 	<form method="post" enctype="multipart/form-data">
 	 <div class="form-group">Current Image<br>
 	 <img class="img-fluid" src="<?php echo $result_row['0']['image']; ?>" style="max-height:10em;" ><br><br>
-	 Choose a product image
+	 
 	 <input type="hidden" name="seller_product|image" value="<?php echo $result_row['0']['image']; ?>" />
-	  <input type="file" class="form-control mt-2" name="seller_product|image|0|product/<?php echo $pid; ?>" placeholder="Choose a product image">
+	 <div class="form-group">
+	 Choose a product image
+	 <!-- Button to Open the Modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  Select Image
+</button>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Product Image</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+			<!-- Nav tabs -->
+				<ul class="nav nav-tabs">				  
+				  <li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#menu1">Choose From Images</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#menu2">Upload</a>
+				  </li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content">
+				  <div class="tab-pane container active" id="menu1">
+				  <?php 
+				  $sql_image = "SELECT DISTINCT image FROM seller_product";
+					$images = singletable_all( $sql_image );
+					
+					echo "<input type='hidden' class='form-control mt-2' name='seller_product|image' id='selectedimage' value='' placeholder='Choose a product image'>";
+					
+					$count_cid = 0;
+					
+					foreach($images as $image){
+					echo "
+					<img src='".$image["image"]."' id='".$count_cid."' style='max-height:100px;max-width:100px;margin:10px;' onclick='selectimg(\"".$image["image"]."\",\"".$count_cid."\")' ></img>";
+						
+					$count_cid++;
+					}
+					
+				  ?>
+				  </div>
+				  <script>
+					var previous_selected = "";
+					function selectimg(imgsrc, id){						
+						document.getElementById("selectedimage").value = imgsrc;						
+						document.getElementById(id).style = "border:2px solid black;max-height:100px;max-width:100px;margin:10px;";
+						if(previous_selected){
+						document.getElementById(previous_selected).style = "border:0px solid red;max-height:100px;max-width:100px;margin:10px;";
+						}
+						previous_selected = id;												
+					}
+				  </script>
+				  <div class="tab-pane container fade" id="menu2">
+				  <input type="file" class="form-control mt-2" name="seller_product|image|0|product/<?php echo $pid; ?>" placeholder="Choose a product image"></div>				  
+				</div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Done</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+	 	 
+	 </div>
+	 
 	 </div>
 	 
 	 <div class="form-group">

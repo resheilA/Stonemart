@@ -2,7 +2,11 @@
 include("header.php");
 $uid = $_SESSION["uid"];
 //$uid = "1WtCRRB25n";
-include_once("savedata.php"); include_once("functions.php");$pid = generateRandomString();?>
+include_once("savedata.php"); include_once("functions.php");$pid = generateRandomString();
+  	include("getsingledata.php"); 
+	include("getalldata.php"); 
+
+?>
 
 <!-----Navbar End------->
  <br><br><br><br><br>
@@ -18,7 +22,79 @@ include_once("savedata.php"); include_once("functions.php");$pid = generateRando
 	<form method="post" enctype="multipart/form-data">
 	 <div class="form-group">
 	 Choose a product image
-	  <input type="file" class="form-control mt-2" name="seller_product|image|0|product/<?php echo $pid; ?>" placeholder="Choose a product image">
+	 <!-- Button to Open the Modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  Select Image
+</button>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Product Image</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+			<!-- Nav tabs -->
+				<ul class="nav nav-tabs">				  
+				  <li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#menu1">Choose From Images</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#menu2">Upload</a>
+				  </li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content">
+				  <div class="tab-pane container active" id="menu1">
+				  <?php 
+				  $sql_image = "SELECT DISTINCT image FROM seller_product";
+					$images = singletable_all( $sql_image );
+					
+					echo "<input type='hidden' class='form-control mt-2' name='seller_product|image' id='selectedimage' value='' placeholder='Choose a product image'>";
+					
+					$count_cid = 0;
+					
+					foreach($images as $image){
+					echo "
+					<img src='".$image["image"]."' id='".$count_cid."' style='max-height:100px;max-width:100px;margin:10px;' onclick='selectimg(\"".$image["image"]."\",\"".$count_cid."\")' ></img>";
+						
+					$count_cid++;
+					}
+					
+				  ?>
+				  </div>
+				  <script>
+					var previous_selected = "";
+					function selectimg(imgsrc, id){						
+						document.getElementById("selectedimage").value = imgsrc;						
+						document.getElementById(id).style = "border:2px solid black;max-height:100px;max-width:100px;margin:10px;";
+						if(previous_selected){
+						document.getElementById(previous_selected).style = "border:0px solid red;max-height:100px;max-width:100px;margin:10px;";
+						}
+						previous_selected = id;												
+					}
+				  </script>
+				  <div class="tab-pane container fade" id="menu2">
+				  <input type="file" class="form-control mt-2" name="seller_product|image|0|product/<?php echo $pid; ?>" placeholder="Choose a product image"></div>				  
+				</div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Done</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+	 	 
 	 </div>
 	 
 	 <div class="form-group">
@@ -87,68 +163,7 @@ include_once("savedata.php"); include_once("functions.php");$pid = generateRando
   </div>
 </div>
 </center>
-   <!-- Footer -->
-<br>
-   <footer class="bg-white">
-    <div class="container py-5">
-        <div class="row py-3">
-            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-                <h6 class="text-uppercase font-weight-bold mb-4">About</h6>
-                <ul class="list-unstyled mb-0">
-                    <li class="mb-2"><a href="#" class="text-muted">Contact Us</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">About Us</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Stories</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Press</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-                <h6 class="text-uppercase font-weight-bold mb-4">Help</h6>
-                <ul class="list-unstyled mb-0">
-                    <li class="mb-2"><a href="#" class="text-muted">Payments</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Shipping</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Cancellation</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Returns</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-                <h6 class="text-uppercase font-weight-bold mb-4">Policy</h6>
-                <ul class="list-unstyled mb-0">
-                    <li class="mb-2"><a href="#" class="text-muted">Return Policy</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Terms Of Use</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Security</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Privacy</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-                <h6 class="text-uppercase font-weight-bold mb-4">Company</h6>
-                <ul class="list-unstyled mb-0">
-                    <li class="mb-2"><a href="#" class="text-muted">Login</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Register</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Sitemap</a></li>
-                    <li class="mb-2"><a href="#" class="text-muted">Our Products</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-lg-0">
-                <h6 class="text-uppercase font-weight-bold mb-4">Registered Office Address</h6>
-                <p class="text-muted mb-4">Here , write the complete address of the Registered office address along with telephone number.</p>
-                <ul class="list-inline mt-4">
-                    <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i class="fab fa-2x fa-twitter"></i></a></li>
-                    <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i class="fab fa-2x fa-facebook-f"></i></a></li>
-                    <li class="list-inline-item"><a href="#" target="_blank" title="instagram"><i class="fab fa-2x fa-instagram"></i></a></li>
-                    <li class="list-inline-item"><a href="#" target="_blank" title="pinterest"><i class="fab fa-2x fa-youtube"></i></a></li>
-                    <li class="list-inline-item"><a href="#" target="_blank" title="vimeo"><i class="fab fa-2x fa-google"></i></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <hr class="p-0 m-0 b-0">
-    <div class=" py-2">
-        <div class="container text-center">
-            <p class="text-muted mb-0 py-2">© 2020 Webportal All rights reserved</p>
-        </div>
-    </div>
-</footer>
-<!--Footer end-->
+<?php include("footer.php"); ?>
 
 	<script>
 	function getdata(type, output){
@@ -178,5 +193,3 @@ include_once("savedata.php"); include_once("functions.php");$pid = generateRando
 		$('#'+div).val(value);
 	}
 	</script>
-</body>
-</html>
