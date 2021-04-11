@@ -26,7 +26,7 @@ else {
 if(isset($_GET["pincode"])){	
 
 $fullcodes = json_decode(file_get_contents("https://api.postalpincode.in/pincode/".$_GET['pincode']), true);
-		//var_dump($fullcodes);
+		
 		if($fullcodes[0]["Status"] == "Success")
 		{
 			if($fullcodes[0]["Status"] == "Success")
@@ -42,7 +42,6 @@ $fullcodes = json_decode(file_get_contents("https://api.postalpincode.in/pincode
 	$cookie_name = "user_city";
 	$cookie_value = $city;
 	setcookie($cookie_name, $cookie_value, time() + (86400 * 60), "/"); // 86400 = 1 day	
-
 }
 	 
 

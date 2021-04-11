@@ -23,7 +23,7 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-lg-3 col-sm-4 col-md-4 col-5"> <a href="" class="brand-wrap" data-abc="true">
-                        <img class="logo" src="img/stonemarketw.png" style="width:75%;"> 
+                        <img class="logo" src="img/smw.png" style="width:100%;"> 
 						</a>
 						<!-------- <span class="logo">Stonemarket</span> </a> -------></div> 
                 <div class="col-lg-4 col-xl-5 col-sm-8 col-md-4 d-none d-md-block">

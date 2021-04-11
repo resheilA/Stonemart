@@ -1,11 +1,11 @@
 <?php
 $servername = "localhost";
-//$username = "portalw_stoneown";
-//$password = "6w@eW6s&@g~m";
-//$dbname = "portalw_stonemart";
-$username = "root";
-$password = "";
-$dbname = "granimart";
+$username = "portalw_stoneown";
+$password = "6w@eW6s&@g~m";
+$dbname = "portalw_stonemart";
+//$username = "root";
+//$password = "";
+//$dbname = "granimart";
 
 
 // Create connection

@@ -57,7 +57,7 @@ include_once("savedata.php"); include_once("functions.php");$pid = generateRando
 				  $sql_image = "SELECT DISTINCT image FROM seller_product";
 					$images = singletable_all( $sql_image );
 					
-					echo "<input type='hidden' class='form-control mt-2' name='seller_product|image' id='selectedimage' value='' placeholder='Choose a product image'>";
+					echo "<input type='hidden' class='form-control mt-2' name='seller_product|image' id='selectedimage' value='img/granite.jpg' placeholder='Choose a product image'>";
 					
 					$count_cid = 0;
 					

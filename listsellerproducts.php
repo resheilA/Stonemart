@@ -19,7 +19,7 @@
 ?>
 	
 <?php 
-$no_of_records = 10;
+$no_of_records = 12;
 
 //PAGINATION
 if(!isset($_GET["page"]))
@@ -157,8 +157,7 @@ $page = ceil($records["total_records"] / $no_of_records);
 								  
 								  <div class="d-flex align-items-center justify-content-between mt-1">
 									<p><i class="fa fa-cart-arrow-down"></i> MOQ - '.$product["moq"].'</p>
-<p><a href="editproduct.php?pid='.$product["pid"].'"><button class="btn">Edit</button></a>
-<a href="deleteproduct.php?pid='.$product["pid"].'" onclick="javascript:return confirm(\'Are you sure you want to delete?\');"><button class="btn">Delete</button></a></p>
+<p><a href="editproduct.php?pid='.$product["pid"].'"></a></p>
 								  </div>
 								</div><img src="'.$product["image"].'" alt="Generic placeholder image" width="200"  class="ml-lg-5 order-1 order-lg-2" data-toggle="modal" data-target="#imageModal" onclick="zoomimage(\''.$product["image"].'\')">
 							  </div>
@@ -198,16 +197,17 @@ else
 		$setpagecount = 1;
 }
 
-if($_GET['page'] > 1){echo "&nbsp<a href= '?page=".($_GET["page"]-1)."'>Prev</a>";}
+if(!isset($_GET["type_sort"])){$_GET["type_sort"] = "";}
+if($_GET['page'] > 1){echo "&nbsp<a href= '?type_sort=".$_GET["type_sort"]."&id=".$_GET["id"]."&page=".($_GET["page"]-1)."'>Prev</a>";}
 for($pagecount = $setpagecount; $pagecount <= $page; $pagecount++)
 {
-	echo "&nbsp<a href= '?page=".$pagecount."'>".$pagecount."</a>";
+	echo "&nbsp<a href= '?type_sort=".$_GET["type_sort"]."&id=".$_GET["id"]."&page=".$pagecount."'>".$pagecount."</a>";
 	
-	if($pagecount == $display_pages){echo "<a href='?page=".($display_pages+1)."'>..more</a>";break;}
+	if($pagecount == $display_pages){echo "<a href='?type_sort=".$_GET["type_sort"]."&id=".$_GET["id"]."&page=".($display_pages+1)."'>..more</a>";break;}
 	
 }
 
-if($_GET['page'] < $page){echo "&nbsp<a href= '?page=".($_GET["page"]+1)."'>Next</a>";}
+if($_GET['page'] < $page){echo "&nbsp<a href= '?type_sort=".$_GET["type_sort"]."&id=".$_GET["id"]."&page=".($_GET["page"]+1)."'>Next</a>";}
 ?>
 </center>
 </section>

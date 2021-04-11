@@ -702,7 +702,7 @@ if($_GET['page'] < $page){echo "&nbsp<a href= '?color_finish=".$color_finish."&f
       <!-- Modal body -->
       <div class="modal-body">	  
         Enter your Pincode
-		<form method="get">
+		<form method="get">				
 			<input type="number" name="pincode">
 				<input type="submit" value="Submit">
 		</form>
@@ -723,17 +723,33 @@ function zoomimage(imgsrc){
 	$("#modalimage").attr("src",imgsrc);
 }
 </script>
-<?php 
 
-if(!(isset($_COOKIE["user_city"])))
-{
-echo '
+
 <script type="text/javascript">
-    $(window).on(\'load\',function(){
-        $(\'#pincodeModal\').modal(\'show\');
+    $(window).on('load',function(){
+		if(!getCookie("user_city"))
+		{
+        $('#pincodeModal').modal('show');
+		}
     });
+	
+	
+	function getCookie(cname) {
+	  var name = cname + "=";
+	  var decodedCookie = decodeURIComponent(document.cookie);
+	  var ca = decodedCookie.split(';');
+	  for(var i = 0; i <ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) == ' ') {
+		  c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+		  return c.substring(name.length, c.length);
+		}
+	  }
+	  return "";
+	}
 </script>
-';
-}
-?>
+
+
 <?php include_once("footer.php"); ?>

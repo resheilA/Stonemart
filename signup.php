@@ -1,4 +1,9 @@
 <?php 
+session_start();
+if(isset($_SESSION["uid"]))
+{
+		header("location:seller.php");
+}
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 	include_once("savedata.php"); 
 	if(!isset($error_mysql)){

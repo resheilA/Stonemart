@@ -120,6 +120,8 @@
 							
 						';
 				}
+				if(isset($seller['logo']) && $seller['logo'] != null)
+				{
 				echo '
             </div><img src="'.$seller['logo'].'" alt="No Image" width="200" class="ml-lg-5 order-1 order-lg-2">
           </div>		  
@@ -128,6 +130,7 @@
         <!-- End -->
 
 			';
+				}
 	}
 	}
 	else
@@ -255,6 +258,7 @@
 							 INNER JOIN product_type ON seller_product.type_id = product_type.no			 												
 							 WHERE seller_product.uid = '".$search."'	
 							 AND product_type.type LIKE '%".$type_sort."%'
+							 LIMIT 12
 							 )
 							 ";
 							 
@@ -304,6 +308,7 @@
 
 								';
 						}
+						echo "<center><a href='listsellerproducts.php?page=1&id=".$search."'><button class='btn-lg'>View all products</button></a></center>";
 				}
 				else
 				{
