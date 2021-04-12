@@ -147,13 +147,13 @@ include("../getalldata.php");
 			  <br>
 			  <label class="form-check-label">Member Name</label><br>
 						<input type="text" name="website_team|member_name"><br><br>
-			  
+			  </label>
 			  <label class="form-check-label">Member Position</label><br>
 						<input type="text" name="website_team|member_pos"><br><br>
-			  
+			  </label>
 			  <label class="form-check-label">Member Description</label><br>
 						<textarea name="website_team|member_desc"></textarea><br><br>
-			  
+			  </label>
 			  <input type="submit" value="Add Member">
 			</form>
 					

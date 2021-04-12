@@ -32,19 +32,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 				  Add a banner to your website<br>
 				  <input type="text" name="website_banner|banner_text_1" value="<?php if(isset($banner_data)){echo$banner_data["banner_text_1"];}?>" placeholder="Text on the banner"><br>
 				  Current Image<br>
-				  <?php if(isset($banner_data)){echo "<img src='".$banner_data["banner_image_1"]."'";}?>>
+				  <?php if(isset($banner_data)){echo "<img height='100' src='".$banner_data["banner_image_1"]."'";}?>>
 				  <input type="file" class="form-control mt-2" name="website_banner|banner_image_1|0|website/banner/242CDKMC" value="<?php if(isset($banner_data)){echo$banner_data["banner_image_1"];}?>" placeholder="Add a banner image">
 				  <br><hr>
 				  Add a banner to your website<br>
 				  <input type="text" name="website_banner|banner_text_2" value="<?php if(isset($banner_data)){echo$banner_data["banner_text_2"];}?>" placeholder="Text on the banner"><br>	  
 				  Current Image<br>
-				  <?php if(isset($banner_data)){echo "<img src='".$banner_data["banner_image_1"]."'";}?>>
+				  <?php if(isset($banner_data)){echo "<img height='100' src='".$banner_data["banner_image_1"]."'";}?>>
 				  <input type="file" class="form-control mt-2" name="website_banner|banner_image_2|0|website/banner/242CDKMC" placeholder="Add a banner image">
 				  <br><hr>
 				  Add a banner to your website<br>
 				  <input type="text" name="website_banner|banner_text_3" value="<?php if(isset($banner_data)){echo$banner_data["banner_text_3"];}?>" placeholder="Text on the banner"><br>	
 				  Current Image<br>
-				  <?php if(isset($banner_data)){echo "<img src='".$banner_data["banner_image_1"]."'";}?>>
+				  <?php if(isset($banner_data)){echo "<img height='100' src='".$banner_data["banner_image_1"]."'";}?>>
 				  <input type="file" class="form-control mt-2" name="website_banner|banner_image_3|0|website/banner/242CDKMC" placeholder="Add a banner image">				  
 				<hr>
  				  </div>	  	  	  			

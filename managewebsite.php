@@ -31,6 +31,7 @@ if(isset($_SESSION["uid"]))
 							<a href="website_creator/get_colors.php"><button class="btn btn-lg m-1" style="display:inline;color:white;">Colors</button></a>		
 							<a href="website_creator/get_services.php"><button class="btn btn-lg m-1" style="display:inline;color:white;">Services</button></a>		
 							<a href="website_creator/get_team.php"><button class="btn btn-lg m-1" style="display:inline;color:white;">Team</button></a>
+							<a href="website_creator/get_banner.php"><button class="btn btn-lg m-1" style="display:inline;color:white;">Banner</button></a>
 							<a href="website_creator/get_team.php"><button class="btn btn-lg m-1" style="display:inline;color:white;">Website Design</button></a>	
 							<a href="website_creator/get_team.php"><button class="btn btn-lg m-1" style="display:inline;color:white;">Settings</button></a>		
 						';

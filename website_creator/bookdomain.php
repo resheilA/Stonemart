@@ -1,9 +1,9 @@
 <?php 
+session_start();
+var_dump($_SESSION);
+
+
 include("header.php");echo "<br><br><br><br><br><br><br><br>";
-include_once("functions.php");
-$did = generateRandomString();
-
-
 function get_contact_details($customer_id){
     include("keys.php");
 $url ='https://test.httpapi.com/api/contacts/default.json?auth-userid='.$authid.'&api-key='.$apikey.'&customer-id='.$customer_id.'&type=Contact';
@@ -92,9 +92,7 @@ $cus_id = get_customer_details($seller["email"]);
  // $cus_id = $sign_up;
 
 if($cus_id != NULL) {
-
-	
-	
+    
 $desc  = "Payment_automatic";
 //add_funds($cus_id, '1600', $desc, rand(1000000,9999999));
 
@@ -103,17 +101,31 @@ $desc  = "Payment_automatic";
 $register_domain = register_domain(strip_tags($cus_id), $_SESSION["bookdomain"]);
 $invid = $register_domain["invoiceid"];
 $domain_status = $register_domain["actionstatusdesc"];
-$success_status = $register_domain["status"];
+
 //var_dump($register_domain);
 
-if($success_status == "Success"){
 $inv_id =  $register_domain["invoiceid"];
 
 $invoice_id = $inv_id;
 //$cus_id  = 22210566;
-pay_customer_invoice($invoice_id);
 
-}
+
+
+include_once("functions.php");
+$did = generateRandomString();
+	
+include_once("connect.php");
+echo $sql_insert = "INSERT INTO website_domain (uid, did, domain_name)
+VALUES ('".$_SESSION["uid"]."', '".$did."', '".$_SESSION["bookdomain"]."')";
+if ($conn->query($sql_insert) === TRUE) {
+	$_SESSION["did"] = $did;
+  echo "New record created successfully";
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}	
+
+
+pay_customer_invoice($invoice_id);
 }
 }
 else
@@ -121,29 +133,14 @@ else
     echo "Hello";
 }
 
-
 ?>
 <center>
 <div class="row"><center>
     <div class="col-12 m-5" style="border:1px solid black;">
         <i class="fa fa-check-circle" style="color:green;font-size:20px;" aria-hidden="true"></i><br>
         <?php echo $domain_status.".Registered domain name is ".$_SESSION["bookdomain"].". <br>Your invoice id : ".$inv_id; ?>
-		<a href="/managewebsite.php">Back To DashBoard </a>
+		<a href="managewebsite.php">Back To DashBoard </a>
     </div>
     </center>
 </div>
 </center>
-<?php 
-
-include("connect.php");
-	$sql_insert = "INSERT INTO website_domain (uid, did, domain_name)
-	VALUES ('".$_SESSION["uid"]."', '".$did."', '".$_SESSION["bookdomain"]."')";
-	if ($conn->query($sql_insert) === TRUE) {	
-		echo $_SESSION["did"] = $did;
-	  echo "New record created successfully";
-	} else {
-	  echo "Error: " . $sql . "<br>" . $conn->error;
-	}
-
-include("footer.php");
-?>
