@@ -23,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
   <?php if(isset($error_mysql)){echo $error_mysql;}?>
 	
 	<h4 style="display:inline;">Add A Banner</h4>
-		
+		<p> Adding more than one image will lead to a slideshow automatically </p>
 	<hr>
 	<div class='row'>
 	<form method="post" enctype="multipart/form-data">					
