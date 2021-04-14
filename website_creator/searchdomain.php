@@ -1,5 +1,11 @@
 <?php include_once("header.php"); ?>
 <?php include_once("functions.php");?>
+<?php 
+	if(isset($_SESSION["did"]))
+	{	
+	echo "<script>window.location.replace('https://stonemarket.in/website_creator/dashboard.php');</script>";
+	}
+?>
 <!-----Navbar End------->
  <br><br><br><br><br>
  <center>
