@@ -39,7 +39,7 @@ include("../getalldata.php");
 	$website_services = singletable_all( $sql );	
 	
 	
-	$sql = "SELECT * FROM website_services INNER JOIN website_service_content ON website_services.service_id = website_service_content.no";
+	$sql = "SELECT * FROM website_services INNER JOIN website_service_content ON website_services.service_id = website_service_content.no where did = '".$did."'";
 			 
 	$web_service = singletable_all( $sql );	
 ?>	
