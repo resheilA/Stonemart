@@ -1,5 +1,14 @@
 <?php include_once("../functions.php");?>
-<?php include_once("header.php"); $did = "41DWF242D";
+<?php include_once("header.php");
+	if(isset($_SESSION["did"]))
+	{
+	$did = $_SESSION["did"];
+	}
+	else
+	{
+	echo "<script>window.location.replace('https://stonemarket.in/website_creator/searchdomain.php');</script>";
+	}
+
 include("../getsingledata.php"); 
 	$sql = "SELECT * FROM website_banner where did = '".$did."'";
 	$banner_data = singletable( $sql );		
