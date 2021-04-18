@@ -1,5 +1,5 @@
 <?php
-include_once("../saveupdate.php");
+
 include_once("header.php");
 include("../getalldata.php"); 
 	if(isset($_SESSION["did"]))
@@ -10,19 +10,23 @@ include("../getalldata.php");
 	{
 	echo "<script>window.location.replace('https://stonemarket.in/website_creator/searchdomain.php');</script>";
 	}
-
 	
-?> 
-
-include_once("../saveupdate.php");
-include_once("header.php");
-include("../getalldata.php"); 
-	if(isset($_SESSION["did"]))
+	if($_SERVER["REQUEST_METHOD"] == "POST") 
 	{
-	$did = $_SESSION["did"];
+		$_POST["website_design|banner_element"]= 1; 
+		$_POST["website_design|about_us_page"]= 1; 
+		$_POST["website_design|products_page"]= 1;
+		$_POST["website_design|team_page"]= 1;
+		$_POST["website_design|gallery_page"]= 1;
+		$_POST["website_design|clients_page"]= 1;
+		$_POST["website_design|contact_us_page"]= 1;
+		$_POST["website_design|navbar_element"]= 1; 
+		$_POST["website_design|footer_element"]= 1;
+		$_POST["website_design|services_element"]= 1;
+		$_POST["website_design|about_us_element"]= 1;
+		include_once("../saveupdate.php");
+		
 	}
-
- 
 
 	
 ?> 
@@ -46,31 +50,7 @@ include("../getalldata.php");
 	   Change the design of your website ?	   
 	   <input type="submit" class="float-right" value="Change the design">
 	  </form>
-	  <!-- The Modal -->
-	<div class="modal" id="choosecolor">
-	  <div class="modal-dialog">
-		<div class="modal-content">
 
-		  <!-- Modal Header -->
-		  <div class="modal-header">
-			<h4 class="modal-title">Upload A Logo Of Your Client</h4>
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-		  </div>
-
-		  <!-- Modal body -->
-		  <div class="modal-body">
-			
-			
-		  </div>
-
-		  <!-- Modal footer -->
-		  <div class="modal-footer">
-			
-		  </div>
-
-		</div>
-	  </div>
-	</div>
 	
 	<hr>
 </div>
