@@ -3,7 +3,7 @@
 <?php 
 	if(isset($_SESSION["did"]))
 	{	
-	echo "<script>window.location.replace('https://stonemarket.in/website_creator/dashboard.php');</script>";
+	echo "<script>window.location.replace('https://stonemarket.in/managewebsite.php');</script>";
 	}
 ?>
 <!-----Navbar End------->

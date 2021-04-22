@@ -13,17 +13,18 @@ include("../getalldata.php");
 	
 	if($_SERVER["REQUEST_METHOD"] == "POST") 
 	{
-		$_POST["website_design|banner_element"]= 1; 
-		$_POST["website_design|about_us_page"]= 1; 
-		$_POST["website_design|products_page"]= 1;
-		$_POST["website_design|team_page"]= 1;
+		$_POST["website_design|banner_element"]= rand(1,2); 
+		$_POST["website_design|about_us_page"]= rand(1,2); 
+		$_POST["website_design|products_page"]= rand(1,2); 
+		$_POST["website_design|team_page"]= rand(1,3); 
 		$_POST["website_design|gallery_page"]= 1;
-		$_POST["website_design|clients_page"]= 1;
-		$_POST["website_design|contact_us_page"]= 1;
+		$_POST["website_design|clients_page"]= 1; 
+		$_POST["website_design|contact_us_page"]= rand(1,5) ;
 		$_POST["website_design|navbar_element"]= 1; 
-		$_POST["website_design|footer_element"]= 1;
-		$_POST["website_design|services_element"]= 1;
-		$_POST["website_design|about_us_element"]= 1;
+		$_POST["website_design|footer_element"]= rand(1,4); 
+		$_POST["website_design|services_element"]= rand(1,9); 
+		$_POST["website_design|about_us_element"]= rand(1,2); 
+		$_POST["website_design|products_element"]= rand(1,4); 
 		include_once("../saveupdate.php");
 		
 	}
