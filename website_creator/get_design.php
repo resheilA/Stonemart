@@ -23,7 +23,7 @@ include("../getalldata.php");
 		$_POST["website_design|navbar_element"]= 1; 
 		$_POST["website_design|footer_element"]= rand(1,4); 
 		$_POST["website_design|services_element"]= rand(1,9); 
-		$_POST["website_design|about_us_element"]= rand(1,2); 
+		$_POST["website_design|about_us_element"]= 1; 
 		$_POST["website_design|products_element"]= rand(1,4); 
 		include_once("../saveupdate.php");
 		
